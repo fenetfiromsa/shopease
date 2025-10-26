@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test dotenv -e .env.test -- jest --runInBand"
+     "start": "node index.js",
+     "dev": "nodemon index.js",
+     "test": "jest"
   },
   "keywords": [],
   "author": "",
