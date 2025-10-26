@@ -29,7 +29,7 @@ function LoginPage() {
       navigate("/admin");
     } catch (error) {
       console.error(error);
-      toast.info(error.response?.data?.message || "Login failed");
+      toast.loading(error.response?.data?.message || "Login failed");
     }
   };
 

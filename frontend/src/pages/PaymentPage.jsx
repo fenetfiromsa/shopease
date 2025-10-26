@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 export default function PaymentPage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const orderData = location.state?.order; // from Checkout page
+  const orderData = location.state?.order; 
   const [method, setMethod] = useState("credit");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -32,7 +32,7 @@ export default function PaymentPage() {
     } catch (error) {
     
       toast.error("Payment failed:", error);
-      toast.info("❌ Payment failed. Try again!");
+      toast.loading("❌ Payment failed. Try again!");
     } finally {
       setLoading(false);
     }

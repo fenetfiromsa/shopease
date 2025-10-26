@@ -30,7 +30,7 @@ export default function AdminProducts() {
       setProducts(res.data.products || res.data);
     } catch (error) {
       toast.error("Error fetching products:", error);
-      toast.info("❌ Failed to fetch products. Login as admin.");
+      toast.loading("❌ Failed to fetch products. Login as admin.");
     }
   };
 
@@ -46,7 +46,7 @@ export default function AdminProducts() {
 
   const handleSubmit = async () => {
     if (!form.name || !form.price || !form.category || !form.description || !form.stock) {
-      return toast.info("❌ Please fill in all fields");
+      return toast.loading("❌ Please fill in all fields");
     }
 
     try {
@@ -62,12 +62,12 @@ export default function AdminProducts() {
         await axiosInstance.put(`/products/${editId}`, formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
-        toast.info("✅ Product updated!");
+        toast.loading("✅ Product updated!");
       } else {
         await axiosInstance.post("/products", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
-        toast.info("✅ Product added!");
+        toast.loading("✅ Product added!");
       }
 
       setForm({
@@ -82,7 +82,7 @@ export default function AdminProducts() {
       fetchProducts();
     } catch (error) {
       toast.error("Error saving product:", error);
-      toast.info(
+      toast.loading(
         error.response?.status === 401
           ? "❌ Unauthorized. Login as admin."
           : "❌ Failed to save product"
@@ -111,7 +111,7 @@ export default function AdminProducts() {
       toast.info("🗑️ Product deleted successfully!");
     } catch (error) {
       toast.error("Error deleting product:", error);
-      toast.info(
+      toast.loading(
         error.response?.status === 401
           ? "❌ Unauthorized. Login as admin."
           : "❌ Failed to delete product"

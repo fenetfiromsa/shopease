@@ -8,7 +8,7 @@ export default function CheckoutPage() {
 
   const handleProceedToPayment = () => {
     if (items.length === 0) {
-      toast.info("Your cart is empty!");
+      toast.loading("Your cart is empty!");
       return;
     }
 
