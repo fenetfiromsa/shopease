@@ -25,34 +25,34 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests with no origin (like Postman)
+      
       if (!origin) return callback(null, true);
       if (allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
-      console.log("❌ CORS blocked request from:", origin);
+      console.log(" CORS blocked request from:", origin);
       return callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
   })
 );
 
-// Test route
+
 app.get("/", (req, res) => {
   res.send("✅ Backend is running!");
 });
 
-// API routes
+
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/users", userRoutes);
 
-// 404 handler
+
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
 
-// Global error handler
+
 app.use((err, req, res, next) => {
   console.error("🔥 Server Error:", err);
   res.status(500).json({
