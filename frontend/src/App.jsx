@@ -14,7 +14,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import AdminAnalytics from "./pages/admin/AdminAnalytics";
 import PaymentPage from "./pages/PaymentPage";
 import OrderSuccess from "./pages/OrderSuccess";
-
+import AboutPage from "./pages/AboutPage";
 function App() {
   return (
     <BrowserRouter>
@@ -35,6 +35,7 @@ function App() {
               <Route path="/admin/analytics" element={<AdminAnalytics />} />
               <Route path="/payment" element={<PaymentPage />} />
               <Route path="/success" element={<OrderSuccess />} />
+               <Route path="/about" element={<AboutPage />} />
             </Routes>
           </main>
           <Footer />
