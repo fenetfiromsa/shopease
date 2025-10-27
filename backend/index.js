@@ -8,40 +8,38 @@ require("dotenv").config();
 
 const app = express();
 
-// Connect to MongoDB
+
 connectDB();
 
-// Middleware
-app.use(express.json());
 
-// CORS setup
 const allowedOrigins = [
   "http://localhost:5173",
   "http://127.0.0.1:5173",
-  "https://shopease-git-main-fenet-firomsas-projects.vercel.app/",
-   "https://shopease-git-main-fenet-firomsas-projects.vercel.app/",
+  "https://shopease-git-main-fenet-firomsas-projects.vercel.app", 
+  "https://shopease-chi-six.vercel.app", 
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        console.log("🚫 CORS blocked request from:", origin);
+        callback(new Error("Not allowed by CORS"));
       }
-      console.log(" CORS blocked request from:", origin);
-      return callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
   })
 );
 
 
+app.use(express.json());
+
+
 app.get("/", (req, res) => {
   res.send("✅ Backend is running!");
 });
-
 
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
@@ -61,7 +59,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Start server
+
 if (process.env.NODE_ENV !== "test") {
   const PORT = process.env.PORT || 5001;
   app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
