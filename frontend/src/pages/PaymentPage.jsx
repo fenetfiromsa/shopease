@@ -20,7 +20,7 @@ export default function PaymentPage() {
     setLoading(true);
     try {
       
-      const res = await axiosInstance.post("/orders", {
+      const res = await axiosInstance.post("/api/orders", {
         ...orderData,
         paymentMethod: method,
       });
