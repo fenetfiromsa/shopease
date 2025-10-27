@@ -34,24 +34,30 @@ function ProductsPage() {
 
   
   const handleAddToCart = (product) => {
-    toast.success(`✅ Added ${product.name} to cart`);
+  const user = JSON.parse(localStorage.getItem("user")); 
 
-    
-    dispatch({
-      type: "ADD_ITEM",
-      payload: {
-        productId: product._id,
-        name: product.name,
-        price: product.price,
-        image: product.image,
-        qty: 1,
-        description: product.description,
-      },
-    });
+  if (!user) {
+    toast.error("Please login to add items to your cart 🛒");
+    return;
+  }
 
-    
-    setAddedToCart((prev) => [...prev, product._id]);
-  };
+  toast.success(`✅ Added ${product.name} to cart`);
+
+  dispatch({
+    type: "ADD_ITEM",
+    payload: {
+      productId: product._id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      qty: 1,
+      description: product.description,
+    },
+  });
+
+  setAddedToCart((prev) => [...prev, product._id]);
+};
+
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
