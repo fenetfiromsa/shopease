@@ -11,22 +11,25 @@ function FilterBar({ search, setSearch, category, setCategory }) {
     "Snacks & Confectionery",
     "Beverages",
     "Household & Cleaning",
-    "Personal Care & Hygiene"
+    "Personal Care & Hygiene",
   ];
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between bg-gray-50 p-4 px-28 rounded-lg shadow mb-6 gap-4">
+    <div className="flex flex-col sm:flex-row items-center justify-between bg-white/70 backdrop-blur-md p-4 sm:p-6 rounded-2xl shadow-md border border-gray-100 gap-4">
+      {/* Search Input */}
       <input
         type="text"
-        placeholder="Search products..."
+        placeholder="🔍 Search products..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="border border-gray-300 rounded-lg px-4 py-2 w-full md:w-1/2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        className="border border-gray-300 rounded-xl px-4 py-3 w-full sm:w-1/2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all text-gray-700 placeholder-gray-400"
       />
+
+      {/* Category Dropdown */}
       <select
         value={category}
         onChange={(e) => setCategory(e.target.value)}
-        className="border border-gray-300 rounded-lg px-4 py-2 w-full md:w-1/4 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        className="border border-gray-300 rounded-xl px-4 py-3 w-full sm:w-1/3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all bg-white text-gray-700"
       >
         {categories.map((cat) => (
           <option key={cat} value={cat}>
