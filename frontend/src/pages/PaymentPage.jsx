@@ -12,31 +12,32 @@ export default function PaymentPage() {
   const [success, setSuccess] = useState(false);
 
   const handlePayment = async () => {
-    if (!orderData) {
-      toast.info("No order data found. Please go back to checkout.");
-      return;
-    }
+  if (!orderData) {
+    toast.info("No order data found. Please go back to checkout.");
+    return;
+  }
 
-    setLoading(true);
-    try {
-      
-      const res = await axiosInstance.post("/orders", {
-        ...orderData,
-        paymentMethod: method,
-      });
+  setLoading(true);
+  try {
+    console.log("Sending order:", orderData);
 
-      console.log("Order saved:", res.data);
-      setSuccess(true);
+    const res = await axiosInstance.post("/api/orders", {
+      items: orderData.items,
+      totalAmount: orderData.totalPrice, 
+      paymentMethod: method,
+    });
 
-      setTimeout(() => navigate("/order-success", { state: { order: res.data } }), 2000);
-    } catch (error) {
-    
-      toast.error("Payment failed:", error);
-      toast.loading("❌ Payment failed. Try again!");
-    } finally {
-      setLoading(false);
-    }
-  };
+    toast.success("✅ Payment successful!");
+    setSuccess(true);
+    setTimeout(() => navigate("/success", { state: { order: res.data } }), 2000);
+  } catch (error) {
+    console.error("Payment error:", error.response?.data || error.message);
+    toast.error(error.response?.data?.message || "Payment failed. Please try again!");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6 mt-20">
