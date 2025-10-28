@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
-// eslint-disable-next-line react-refresh/only-export-components
+
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
