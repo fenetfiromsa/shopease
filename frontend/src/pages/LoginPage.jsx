@@ -17,8 +17,12 @@ const handleSubmit = async (e) => {
   try {
     const res = await axiosInstance.post("/users/login", formData);
 
-  
+    console.log("Backend response:", res.data); 
+
     const { token, ...userData } = res.data;
+
+    console.log("Extracted token:", token);    
+    console.log("Extracted userData:", userData);
 
     login(userData, token); 
     navigate("/admin");
