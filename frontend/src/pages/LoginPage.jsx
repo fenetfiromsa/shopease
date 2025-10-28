@@ -12,26 +12,21 @@ function LoginPage() {
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axiosInstance.post("/users/login", formData);
-      
-      login(
-        {
-          _id: res.data._id,
-          name: res.data.name,
-          email: res.data.email,
-          isAdmin: res.data.isAdmin,
-        },
-        res.data.token
-      );
-      navigate("/admin");
-    } catch (error) {
-      console.error(error);
-      toast.loading(error.response?.data?.message || "Login failed");
-    }
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await axiosInstance.post("/users/login", formData);
+
+  
+    const { token, ...userData } = res.data;
+
+    login(userData, token); 
+    navigate("/admin");
+  } catch (error) {
+    console.error(error);
+    toast.error(error.response?.data?.message || "Login failed");
+  }
+};
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
