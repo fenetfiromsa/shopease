@@ -21,7 +21,7 @@ export default function PaymentPage() {
   try {
     console.log("Sending order:", orderData);
 
-    const res = await axiosInstance.post("/api/orders", {
+    const res = await axiosInstance.post("/orders", {
       items: orderData.items,
       totalAmount: orderData.totalPrice, 
       paymentMethod: method,
