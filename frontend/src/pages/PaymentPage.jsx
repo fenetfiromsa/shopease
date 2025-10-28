@@ -49,7 +49,7 @@ export default function PaymentPage() {
           Complete your payment to confirm your order.
         </p>
 
-        {/* ORDER SUMMARY */}
+  
         {orderData && (
           <div className="mb-6 bg-gray-50 p-4 rounded-xl border">
             <h2 className="font-semibold text-lg mb-2">Order Summary</h2>
@@ -66,7 +66,7 @@ export default function PaymentPage() {
           </div>
         )}
 
-        {/* PAYMENT METHOD */}
+      
         <div className="space-y-3">
           <label className="flex items-center gap-3 border p-3 rounded-xl cursor-pointer hover:bg-gray-50">
             <input
