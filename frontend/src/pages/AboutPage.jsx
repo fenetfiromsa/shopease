@@ -22,11 +22,10 @@ function AboutPage() {
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-gray-800 mb-6">Who We Are</h2>
           <p className="text-gray-600 leading-relaxed text-lg max-w-3xl mx-auto">
-            <strong>ShopEase</strong> is an innovative e-commerce platform built
-            to make online shopping easier and more enjoyable. Whether you're
-            looking for the latest tech, stylish fashion, or everyday essentials,
-            we’ve got you covered with trusted sellers, fast delivery, and secure
-            payments.
+            <strong>ShopEase</strong> is your trusted online supermarket, designed to make everyday shopping faster, simpler, and 
+            more affordable. From fresh produce and pantry staples to household essentials and personal care items,
+            we’ve got everything you need under one virtual roof.
+            Enjoy a wide selection of quality products, reliable delivery, and secure checkout — all to make your grocery shopping effortless and convenient.
           </p>
         </div>
       </section>
