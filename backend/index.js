@@ -13,7 +13,7 @@ connectDB();
 
 
 const allowedOrigins = [
-   origin: '*', // allow all
+ '*', // allow all
 ];
 
 app.use(
