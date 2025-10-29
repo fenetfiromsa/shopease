@@ -18,8 +18,6 @@ It provides a complete shopping experience — from browsing and filtering produ
 
 💳 Checkout and process payments (mock or Cash on Delivery)
 
-📦 View your own orders and history
-
 🔐 Secure authentication (JWT-based login/signup)
 
 🛠️ Admin Features
