@@ -46,7 +46,7 @@ const signup = async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      token: generateToken(user),
+      token: generateToken(user._id),
     });
   } catch (error) {
     console.error('Signup Error:', error.message);
