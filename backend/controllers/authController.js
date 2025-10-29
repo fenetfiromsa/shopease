@@ -47,7 +47,7 @@ const signup = async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      token: generateToken(user._id),
+      token: generateToken(user),
     });
   } catch (error) {
     console.error('Signup Error:', error.message);
@@ -71,7 +71,7 @@ const login = async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      token: generateToken(user._id),
+      token: generateToken(user),
     });
   } catch (error) {
     console.error('Login Error:', error.message);
