@@ -13,10 +13,7 @@ connectDB();
 
 
 const allowedOrigins = [
-  "http://localhost:5173",
-  "http://127.0.0.1:5173",
-  "https://shopease-git-main-fenet-firomsas-projects.vercel.app", 
-  "https://shopease-chi-six.vercel.app", 
+   origin: '*', // allow all
 ];
 
 app.use(
