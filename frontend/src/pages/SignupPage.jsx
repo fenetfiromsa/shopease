@@ -12,16 +12,32 @@ function SignupPage() {
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axiosInstance.post("/users/signup", formData);
-      login(res.data);
-      navigate("/");
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Signup failed");
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await axiosInstance.post("/users/signup", formData);
+
+    
+    const { token, ...userData } = res.data;
+
+    if (!token) throw new Error("No token returned from backend");
+
+
+    login(userData, token);
+
+    
+    if (userData.isAdmin) {
+      navigate("/admin");
+    } else {
+      navigate("/dashboard"); 
     }
-  };
+
+    toast.success("Signup successful!");
+  } catch (error) {
+    toast.error(error.response?.data?.message || error.message || "Signup failed");
+  }
+};
+
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
