@@ -81,7 +81,8 @@ Start the frontend:
 
 npm run dev
 
-🧠 Folder Structure
+
+🧠 Project Structure
 ShopEase/
 │
 ├── backend/
@@ -89,18 +90,15 @@ ShopEase/
 │   ├── models/
 │   ├── routes/
 │   ├── middleware/
-│   ├── server.js
-│   └── .env
+│   └── server.js
 │
 ├── frontend/
 │   ├── src/
 │   │   ├── components/
 │   │   ├── pages/
 │   │   ├── context/
-│   │   ├── utils/
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   └── .env
+│   │   └── utils/
+│   └── main.jsx
 │
 └── README.md
 
