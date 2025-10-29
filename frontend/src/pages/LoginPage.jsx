@@ -31,7 +31,7 @@ function LoginPage() {
       if (userData.isAdmin) {
         navigate("/admin");
       } else {
-        navigate("/dashboard"); 
+        navigate("/"); 
       }
 
       toast.success("Login successful!");
