@@ -11,6 +11,7 @@ const generateToken = (user) => {
 };
 
 
+
 const signup = async (req, res) => {
   try {
     const { name, email, password, isAdmin: requestedAdmin } = req.body;
