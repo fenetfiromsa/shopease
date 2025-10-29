@@ -29,7 +29,7 @@ function SignupPage() {
     if (userData.isAdmin) {
       navigate("/admin");
     } else {
-      navigate("/dashboard"); 
+      navigate("/"); 
     }
 
     toast.success("Signup successful!");
