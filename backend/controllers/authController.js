@@ -10,50 +10,40 @@ const generateToken = (user) => {
   );
 };
 
-
-
 const signup = async (req, res) => {
   try {
-    const { name, email, password, isAdmin: requestedAdmin } = req.body;
+    let { name, email, password } = req.body;
+    email = email.toLowerCase().trim();
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser)
+      return res.status(400).json({ message: "User already exists" });
 
 
-    const userExists = await User.findOne({ email });
-    if (userExists) return res.status(400).json({ message: 'User already exists' });
+    const user = new User({ name, email, password });
+    await user.save();
 
-    
-    let isAdmin = false;
-    if (requestedAdmin) {
-      
-      if (req.user && req.user.isAdmin) {
-        isAdmin = true;
-      } else {
-        return res.status(403).json({ message: 'Only admins can create other admins' });
-      }
-    }
-
-  
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create user
-    const user = await User.create({
-      name,
-      email,
-      password: hashedPassword,
-      isAdmin,
-    });
+    const token = jwt.sign(
+      { id: user._id, isAdmin: user.isAdmin },
+      process.env.JWT_SECRET,
+      { expiresIn: "30d" }
+    );
 
     res.status(201).json({
       _id: user._id,
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      token: generateToken(user),
+      token,
     });
   } catch (error) {
-    console.error('Signup Error:', error.message);
-    res.status(500).json({ message: 'Server error during signup' });
+    console.error("Signup Error:", error);
+    res.status(500).json({ message: "Server error during signup" });
   }
 };
+
+
+
 
 //  Login Controller
 const login = async (req, res) => {
