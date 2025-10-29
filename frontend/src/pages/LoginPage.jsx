@@ -8,30 +8,38 @@ function LoginPage() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
-  
+
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const res = await axiosInstance.post("/users/login", formData);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axiosInstance.post("/users/login", formData);
 
-    console.log("Backend response:", res.data); 
+      console.log("Backend response:", res.data);
 
-    const { token, ...userData } = res.data;
+      const { token, ...userData } = res.data;
 
-    console.log("Extracted token:", token);    
-    console.log("Extracted userData:", userData);
-  
+      if (!token) {
+        throw new Error("No token returned from backend");
+      }
 
-    login(userData, token); 
-    navigate("/admin");
-  } catch (error) {
-    console.error(error);
-    toast.error(error.response?.data?.message || "Login failed");
-  }
-};
+      login(userData, token);
+
+    
+      if (userData.isAdmin) {
+        navigate("/admin");
+      } else {
+        navigate("/dashboard"); 
+      }
+
+      toast.success("Login successful!");
+    } catch (error) {
+      console.error("Login failed:", error.response?.data || error.message);
+      toast.error(error.response?.data?.message || "Login failed");
+    }
+  };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -45,6 +53,7 @@ const handleSubmit = async (e) => {
           name="email"
           type="email"
           placeholder="Email"
+          autocomplete="email"
           value={formData.email}
           onChange={handleChange}
           className="w-full border p-3 mb-4 rounded-lg"
@@ -54,6 +63,7 @@ const handleSubmit = async (e) => {
           name="password"
           type="password"
           placeholder="Password"
+          autocomplete="current-password"
           value={formData.password}
           onChange={handleChange}
           className="w-full border p-3 mb-4 rounded-lg"
